@@ -3,8 +3,9 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { createClient } from '@supabase/supabase-js';
 import Image from "next/image";
 import HomeImage from '../../assets/img/happy_day.png';
-import downloadjs from 'downloadjs';
-import html2canvas from 'html2canvas';
+// import downloadjs from 'downloadjs';
+// import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 import React, { forwardRef, useImperativeHandle } from 'react';
 
 
@@ -210,9 +211,20 @@ const FormComponent = forwardRef((props, ref) => {
         if(dowloadImage){
             console.log('Entro');
 
-            const canvas = await html2canvas(dowloadImage);
+            // const canvas = await html2canvas(dowloadImage);
+            toPng(dowloadImage, { cacheBust: false })
+                .then((dataUrl) => {
+                        console.log(dataUrl);
+                        // const link = document.createElement("a");
+                        // link.download = "my-image-name.png";
+                        // link.href = dataUrl;
+                        // link.click();
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
 
-            console.log(canvas);
+            console.log('Termino');
             // const dataURL = canvas.toDataURL('image/png');
             // const response = await fetch(dataURL);
             // const imageBlob = await response.blob();
@@ -220,16 +232,16 @@ const FormComponent = forwardRef((props, ref) => {
             // console.log(imageUrl);
         }
 
-        if(elementRef.current){
+        // if(elementRef.current){
 
-            const canvas = await html2canvas(elementRef.current, { useCORS: true, allowTaint: true });
-            const dataURL = canvas.toDataURL('image/png');
-            const response = await fetch(dataURL);
-            const imageBlob = await response.blob();
-            const imageUrl = URL.createObjectURL(imageBlob);
-            setTag(imageUrl);
+        //     const canvas = await html2canvas(elementRef.current, { useCORS: true, allowTaint: true });
+        //     const dataURL = canvas.toDataURL('image/png');
+        //     const response = await fetch(dataURL);
+        //     const imageBlob = await response.blob();
+        //     const imageUrl = URL.createObjectURL(imageBlob);
+        //     setTag(imageUrl);
 
-        }
+        // }
     };
 
     return(
