@@ -3,7 +3,7 @@
 // Imports Fonts
 @font-face {
     font-family: helvetica-font;
-    src: url('../assets/fonts/helvetica.ttc');
+    src: url('../assets/fonts/HelveticaNeue-Condensed.otf');
 }
 
 @font-face {
@@ -14,6 +14,7 @@
 
 // Fonts
 $font_regular: helvetica-font;
+// $font_regular: 'Helvetica Neue', sans-serif;
 $font_bold: black_helventica;
 
 // Colors
