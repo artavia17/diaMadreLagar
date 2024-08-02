@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import LogoLagar from '../../assets/img/lagar_logo.svg';
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useRef } from "react";
+import FormComponent from "./FormComponent";
 
 const HeaderComponent = () => {
 
     const [name, setName] = useState('<span>E</span><span>l</span><span>l</span><span>a</span>');
+    const childRef : any = useRef();
 
     const registerName = (e : FormEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -22,9 +24,14 @@ const HeaderComponent = () => {
             localStorage.setItem('name','<span>E</span><span>l</span><span>l</span><span>a</span>');
         }
 
+        if(childRef && childRef.current){
+            childRef.current.showAlert();
+        }
+
     }
 
     return (
+        <>
         <header>
             <section className="lagar-logo">
                 <Image src={LogoLagar.src} alt="El Lagar" width={LogoLagar.width} height={LogoLagar.height}/>
@@ -40,6 +47,10 @@ const HeaderComponent = () => {
                 </section>
             </section>
         </header>
+        <main>
+            <FormComponent ref={childRef}/>
+        </main>
+        </>
     )
 
 }

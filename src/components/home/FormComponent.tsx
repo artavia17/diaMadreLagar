@@ -1,12 +1,14 @@
 'use client';
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { createClient } from '@supabase/supabase-js';
-import InstagramIcon from '../../assets/img/instagram.svg';
 import Image from "next/image";
 import HomeImage from '../../assets/img/happy_day.png';
-import { toPng } from 'html-to-image';
+// import { toPng } from 'html-to-image';
+import downloadjs from 'downloadjs';
+import html2canvas from 'html2canvas';
+import React, { forwardRef, useImperativeHandle } from 'react';
 
-const FormComponent = () => {
+const FormComponent = forwardRef((props, ref) => {
 
 
     const supabaseUrl = 'https://cbrpwbonvjolaknkszsg.supabase.co'
@@ -17,15 +19,18 @@ const FormComponent = () => {
     const [motherName, setMotherName] = useState('');
     const elementRef = useRef(null);
 
-    useEffect(() => {
-        const name = localStorage.getItem('name');
+
+    useImperativeHandle(ref, () => ({
+        showAlert() {
+            const name = localStorage.getItem('name');
         
-        if(name){
-            setMotherName(name);   
-        }else{
-            setMotherName('<span>E</span><span>l</span><span>l</span><span>a</span>');
+            if(name){
+                setMotherName(name);   
+            }else{
+                setMotherName('<span>E</span><span>l</span><span>l</span><span>a</span>');
+            }
         }
-    }, [])
+      }));
 
 
     const sendForm = async (e : FormEvent) => {
@@ -180,44 +185,38 @@ const FormComponent = () => {
 
     const descargar = () => {
 
-        setInterval(() => {
-            const name = localStorage.getItem('name');
+        // setInterval(() => {
+        //     const name = localStorage.getItem('name');
         
-            if(name){
-                setMotherName(name);   
-            }else{
-                setMotherName('<span>E</span><span>l</span><span>l</span><span>a</span>');
-            }
-        }, 500)
+        //     if(name){
+        //         setMotherName(name);   
+        //     }else{
+        //         setMotherName('<span>E</span><span>l</span><span>l</span><span>a</span>');
+        //     }
+        // }, 500)
 
-        setTimeout(() => {
-            const containerElement : HTMLElement | null = document.querySelector('.title_image');
+        // setTimeout(() => {
+            // const containerElement : HTMLElement | null = document.querySelector('.title_image');
 
-            if(containerElement){
+            // if(containerElement){
     
-                const spans = containerElement.querySelectorAll('span');
-                if (spans.length > 1) {
-                    spans[0].style.color = "#FDB913";
-                    spans[1].style.color = "#FDB913";
-                }
-            }
+            //     const spans = containerElement.querySelectorAll('span');
+            //     if (spans.length > 1) {
+            //         spans[0].style.color = "#FDB913";
+            //         spans[1].style.color = "#FDB913";
+            //     }
+            // }
 
             htmlToImageConvert();
-        }, 300);
+        // }, 300);
     }
 
-    const htmlToImageConvert = () => {
+    const htmlToImageConvert = async () => {
         if(elementRef.current){
-            toPng(elementRef.current, { cacheBust: false })
-            .then((dataUrl) => {
-                const link = document.createElement("a");
-                link.download = "my-image-name.png";
-                link.href = dataUrl;
-                link.click();
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+
+            const canvas = await html2canvas(elementRef.current);
+            const dataURL = canvas.toDataURL('image/png');
+            downloadjs(dataURL, 'ellagardemama.png', 'image/png');
         }
     };
 
@@ -283,7 +282,7 @@ const FormComponent = () => {
                 </section>
                 {
                     enviado && (
-                        <section 
+                        <div 
                             ref={elementRef}
                             className="image_descargar"
                             style={{
@@ -291,7 +290,6 @@ const FormComponent = () => {
                                 height: "500px",
                                 position: "relative",
                                 overflow: "hidden",
-                                borderRadius: "15px",
                                 zIndex: 999,
                                 display: "flex",
                                 alignItems: "center",
@@ -345,12 +343,14 @@ const FormComponent = () => {
                                     ></p>
                             </section>
 
-                        </section>
+                        </div>
                     )
                 }
         </section>
     )
 
-}
+});
+
+FormComponent.displayName = 'FormComponent';
 
 export default FormComponent;
