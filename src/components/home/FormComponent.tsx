@@ -1,5 +1,5 @@
 'use client';
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { createClient } from '@supabase/supabase-js';
 import InstagramIcon from '../../assets/img/instagram.svg';
 import Image from "next/image";
@@ -16,6 +16,16 @@ const FormComponent = () => {
     const [enviado, setEnviado] = useState(false);
     const [motherName, setMotherName] = useState('');
     const elementRef = useRef(null);
+
+    useEffect(() => {
+        const name = localStorage.getItem('name');
+        
+        if(name){
+            setMotherName(name);   
+        }else{
+            setMotherName('<span>E</span><span>l</span><span>l</span><span>a</span>');
+        }
+    }, [])
 
 
     const sendForm = async (e : FormEvent) => {
@@ -170,13 +180,15 @@ const FormComponent = () => {
 
     const descargar = () => {
 
-        const name = localStorage.getItem('name');
-
-        if(name){
-            setMotherName(name);   
-        }else{
-            setMotherName('<span>E</span><span>l</span><span>l</span><span>a</span>');
-        }
+        setInterval(() => {
+            const name = localStorage.getItem('name');
+        
+            if(name){
+                setMotherName(name);   
+            }else{
+                setMotherName('<span>E</span><span>l</span><span>l</span><span>a</span>');
+            }
+        }, 500)
 
         setTimeout(() => {
             const containerElement : HTMLElement | null = document.querySelector('.title_image');
