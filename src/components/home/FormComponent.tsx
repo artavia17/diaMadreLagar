@@ -190,9 +190,10 @@ const FormComponent = forwardRef((props, ref) => {
     const htmlToImageConvert = async () => {
         if(elementRef.current){
 
-            const canvas = await html2canvas(elementRef.current);
+            const canvas = await html2canvas(elementRef.current, { useCORS: true, allowTaint: true });
             const dataURL = canvas.toDataURL('image/png');
             downloadjs(dataURL, 'ellagardemama.png','image/png')
+
             // html2canvas(elementRef.current).then(canvas =>
             // {    
             //     downloadjs(canvas, 'ellagardemama.png','image/png')
