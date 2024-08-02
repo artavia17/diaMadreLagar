@@ -216,7 +216,15 @@ const FormComponent = forwardRef((props, ref) => {
 
             const canvas = await html2canvas(elementRef.current);
             const dataURL = canvas.toDataURL('image/png');
-            downloadjs(dataURL, 'ellagardemama.png', 'image/png');
+            // downloadjs(dataURL, 'ellagardemama.png', 'image/png');
+
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = 'ellagardemama.png';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     };
 
@@ -303,11 +311,11 @@ const FormComponent = forwardRef((props, ref) => {
                                 width={HomeImage.width} 
                                 height={HomeImage.height}
                                 style={{
+                                    width: "400px",
+                                    height: "500px",
                                     position: "absolute",
                                     top: "0px",
                                     left: "0px",
-                                    width: "100%",
-                                    height: "100%",
                                     zIndex: -1,
                                     objectFit: "cover",
                                 }}
