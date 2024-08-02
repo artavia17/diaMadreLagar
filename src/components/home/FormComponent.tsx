@@ -202,7 +202,7 @@ const FormComponent = forwardRef((props, ref) => {
 
     const htmlToImageConvert = async () => {
 
-        alert("El formulario se envio con exito");
+        setTag('https://outlook.office.com/mail/');
 
         if(elementRef.current){
 
