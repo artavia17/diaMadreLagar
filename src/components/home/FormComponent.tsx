@@ -233,7 +233,7 @@ const FormComponent = forwardRef((props, ref) => {
                                     <span className="center">Si querés descargá esta imagen, compartila en tus stories y etiquetanos.</span>
                                 </section>
                                 <section className="double">
-                                    <a className="send" href={tag} target="_black" download={true}>Descargar</a>
+                                    <a className="send" href={tag} download={true}>Descargar</a>
                                     {/* <a href="">
                                         <Image  className="logo" src={InstagramIcon.src} alt="El Lagar" width={InstagramIcon.width} height={InstagramIcon.height}/>
                                     </a> */}
