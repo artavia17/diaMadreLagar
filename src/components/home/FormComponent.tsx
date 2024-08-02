@@ -6,7 +6,9 @@ import HomeImage from '../../assets/img/happy_day.png';
 // import downloadjs from 'downloadjs';
 import * as htmlToImage from 'html-to-image';
 import React, { forwardRef, useImperativeHandle } from 'react';
-import html2canvas from "@xuannghia/html2canvas";
+import html2canvas from "html2canvas";
+import { useToSvg } from '@hugocxl/react-to-image'
+import domtoimage from 'dom-to-image';
 
 
 const FormComponent = forwardRef((props, ref) => {
@@ -210,17 +212,19 @@ const FormComponent = forwardRef((props, ref) => {
 
         if(dowloadImage){
 
+            domtoimage.toPng(dowloadImage).then(url  => {
+                setTag(url);
+            }).catch(err => {
+                console.log(err);
+            })
+           
+
             // const canvas = await html2canvas(dowloadImage, { useCORS: true, allowTaint: true });
             // const dataURL = canvas.toDataURL('image/png');
             // const response = await fetch(dataURL);
             // const imageBlob = await response.blob();
             // const imageUrl = URL.createObjectURL(imageBlob);
             // setTag(imageUrl);
-
-            html2canvas(dowloadImage, { useCORS: true, allowTaint: true }).then(canvas => {
-                console.log("canvas: " + canvas);
-            })
-
 
             // link.download = 'html-to-img.png';
             // link.href = dataUrl;
@@ -261,26 +265,7 @@ const FormComponent = forwardRef((props, ref) => {
         // }
     };
 
-    const  base64toBlob = (base64Data : string , contentType : string) => {
-        contentType = contentType || '';
-        var sliceSize = 1024;
-        var byteCharacters = atob(base64Data);
-        var bytesLength = byteCharacters.length;
-        var slicesCount = Math.ceil(bytesLength / sliceSize);
-        var byteArrays = new Array(slicesCount);
     
-        for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-            var begin = sliceIndex * sliceSize;
-            var end = Math.min(begin + sliceSize, bytesLength);
-    
-            var bytes = new Array(end - begin);
-            for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
-                bytes[i] = byteCharacters[offset].charCodeAt(0);
-            }
-            byteArrays[sliceIndex] = new Uint8Array(bytes);
-        }
-        return new Blob(byteArrays, { type: contentType });
-    };
 
     return(
         <section className="form">
@@ -346,7 +331,7 @@ const FormComponent = forwardRef((props, ref) => {
                         ref={elementRef}
                         className="image_descargar"
                         style={{
-                            width: "400px",
+                            width: "100%",
                             height: "500px",
                             position: "relative",
                             overflow: "hidden",
@@ -354,7 +339,9 @@ const FormComponent = forwardRef((props, ref) => {
                             display: enviado ? "flex" : "none",
                             alignItems: "center",
                             justifyContent: "center",
-                            backgroundImage: `url(${HomeImage.src})`
+                            backgroundImage: `url(${HomeImage.src})`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: "center"
                         }}
                     >
 
