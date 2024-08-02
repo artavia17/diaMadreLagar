@@ -208,12 +208,13 @@ const FormComponent = forwardRef((props, ref) => {
         console.log('Cargo')
 
         if(dowloadImage){
-            const canvas = await html2canvas(dowloadImage, { useCORS: true, allowTaint: true });
-            const dataURL = canvas.toDataURL('image/png');
-            const response = await fetch(dataURL);
-            const imageBlob = await response.blob();
-            const imageUrl = URL.createObjectURL(imageBlob);
-            console.log(imageUrl);
+            const canvas = await html2canvas(dowloadImage);
+            console.log(canvas);
+            // const dataURL = canvas.toDataURL('image/png');
+            // const response = await fetch(dataURL);
+            // const imageBlob = await response.blob();
+            // const imageUrl = URL.createObjectURL(imageBlob);
+            // console.log(imageUrl);
         }
 
         if(elementRef.current){
