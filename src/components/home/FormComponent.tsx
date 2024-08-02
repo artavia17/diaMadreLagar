@@ -4,9 +4,9 @@ import { createClient } from '@supabase/supabase-js';
 import Image from "next/image";
 import HomeImage from '../../assets/img/happy_day.png';
 // import downloadjs from 'downloadjs';
-// import html2canvas from 'html2canvas';
 import * as htmlToImage from 'html-to-image';
 import React, { forwardRef, useImperativeHandle } from 'react';
+import html2canvas from "html2canvas";
 
 
 const FormComponent = forwardRef((props, ref) => {
@@ -210,10 +210,18 @@ const FormComponent = forwardRef((props, ref) => {
 
         if(dowloadImage){
 
-            const dataUrl = await htmlToImage.toPng(dowloadImage);
-            setTag(dataUrl);
+            // const canvas = await html2canvas(dowloadImage, { useCORS: true, allowTaint: true });
+            // const dataURL = canvas.toDataURL('image/png');
+            // const response = await fetch(dataURL);
+            // const imageBlob = await response.blob();
+            // const imageUrl = URL.createObjectURL(imageBlob);
+            // setTag(imageUrl);
 
-            
+            html2canvas(dowloadImage, { useCORS: true, allowTaint: true }).then(canvas => {
+                console.log("canvas: " + canvas);
+            })
+
+
             // link.download = 'html-to-img.png';
             // link.href = dataUrl;
             // toPng(dowloadImage, { cacheBust: false })
