@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import Image from "next/image";
 import HomeImage from '../../assets/img/happy_day.png';
 // import downloadjs from 'downloadjs';
-// import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import { toPng } from 'html-to-image';
 import React, { forwardRef, useImperativeHandle } from 'react';
 
@@ -211,20 +211,30 @@ const FormComponent = forwardRef((props, ref) => {
         if(dowloadImage){
             console.log('Entro');
 
-            // const canvas = await html2canvas(dowloadImage);
-            toPng(dowloadImage, { cacheBust: false })
-                .then((dataUrl) => {
-                        console.log(dataUrl);
-                        // const link = document.createElement("a");
-                        // link.download = "my-image-name.png";
-                        // link.href = dataUrl;
-                        // link.click();
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
+            const canvas = await html2canvas(dowloadImage, {
+                allowTaint: true,
+                useCORS : true,
+            });
 
-            console.log('Termino');
+            console.log(canvas);
+            // toPng(dowloadImage, { cacheBust: false })
+            //     .then((dataUrl) => {
+
+            //             const base64Data = dataUrl.split(',')[1]; // Extraer la parte base64
+            //             const contentType = 'image/png';
+            //             const imageBlob = base64toBlob(base64Data, contentType);
+            //             const imageUrl = URL.createObjectURL(imageBlob);
+            //             console.log(imageUrl);
+            //             // const link = document.createElement("a");
+            //             // link.download = "my-image-name.png";
+            //             // link.href = dataUrl;
+            //             // link.click();
+            //         })
+            //         .catch((err) => {
+            //             console.log(err);
+            //         });
+
+
             // const dataURL = canvas.toDataURL('image/png');
             // const response = await fetch(dataURL);
             // const imageBlob = await response.blob();
@@ -242,6 +252,27 @@ const FormComponent = forwardRef((props, ref) => {
         //     setTag(imageUrl);
 
         // }
+    };
+
+    const  base64toBlob = (base64Data : string , contentType : string) => {
+        contentType = contentType || '';
+        var sliceSize = 1024;
+        var byteCharacters = atob(base64Data);
+        var bytesLength = byteCharacters.length;
+        var slicesCount = Math.ceil(bytesLength / sliceSize);
+        var byteArrays = new Array(slicesCount);
+    
+        for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+            var begin = sliceIndex * sliceSize;
+            var end = Math.min(begin + sliceSize, bytesLength);
+    
+            var bytes = new Array(end - begin);
+            for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
+                bytes[i] = byteCharacters[offset].charCodeAt(0);
+            }
+            byteArrays[sliceIndex] = new Uint8Array(bytes);
+        }
+        return new Blob(byteArrays, { type: contentType });
     };
 
     return(
