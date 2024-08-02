@@ -1,0 +1,83 @@
+footer{
+
+    background-color: $secundary_lagar_color;
+    border-top-left-radius: rem(25px);
+    border-top-right-radius: rem(25px);
+    overflow: hidden;
+    padding: rem(20px) 0;
+
+    .responsive-box{
+        margin: auto;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+
+        @include bp(mobileBIG){
+            flex-flow: row;
+            justify-content: space-between;
+        }
+
+        .logo{
+            width: 200px;
+            height: auto;
+            margin: auto;
+
+            @include bp(mobileBIG){
+                width: 210px;
+                margin: initial;
+            }
+
+            @include bp(tablet){
+                width: 220px;
+            }
+
+            @include bp(tabletMD){
+                width: 230px;
+            }
+
+            @include bp(laptop){
+                width: 240px;
+            }
+
+            @include bp(laptopBIG){
+                width: 250px;
+            }
+
+            @include bp(escritorio){
+                width: 260px;
+            }   
+        }
+
+        .social{
+            display: flex;
+            margin-top: 20px;
+            column-gap: rem(10px);
+
+            a{
+                background-color: $button_transparent_color;
+                padding: rem(5px) rem(15px);
+                border-radius: rem(10px);
+                display: flex;
+                align-items: center;
+                transition: .2s ease;
+
+                img{
+                    width: auto;
+                    height: 30px;
+                }
+
+                &:hover{
+                    scale: 1.05;
+                }
+
+                &:active{
+                    scale: 0.95;
+                }
+            }
+
+        }
+
+    }
+
+}

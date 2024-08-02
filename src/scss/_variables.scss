@@ -1,0 +1,72 @@
+@use 'sass:math';
+
+// Imports Fonts
+@font-face {
+    font-family: helvetica-font;
+    src: url('../assets/fonts/helvetica.ttc');
+}
+
+@font-face {
+    font-family: black_helventica;
+    src: url('../assets/fonts/helveticablackoriginal_bold.otf');
+}
+
+
+// Fonts
+$font_regular: helvetica-font;
+$font_bold: black_helventica;
+
+// Colors
+$text_color: #FFFFFF;
+$text_color_transparent: #ffffff8f;
+$background_color: #F8E2C4;
+$principal_lagar_color: #FDB913;
+$secundary_lagar_color: #ED1C24;
+$paragraf_color: #96877C;
+$button_transparent_color: rgba(0, 0, 0, 0.24);
+
+// Medias Query
+@mixin bp($point) {
+    @if $point == escritorio {
+        @media (min-width: 1600px) { @content; }
+    }
+
+    @else if $point == laptopBIG {
+        @media (min-width: 1220px) { @content; }
+    }
+
+    @else if $point == laptop {
+        @media (min-width: 1100px) { @content; }
+    }
+
+    @else if $point == tabletMD {
+        @media (min-width: 901px)  { @content; }
+    }
+
+    @else if $point == tablet {
+        @media (min-width: 700px)  { @content; }
+    }
+
+    @else if($point == mobileBIG){
+        @media (min-width: 550px)  { @content; }
+    }
+
+    @else if($point == mobileMedium){
+        @media (min-width: 420px)  { @content; }
+    }
+}
+
+// Animation
+@mixin keyframes($name){
+    @keyframes #{$name}{
+        @content;
+    }
+}
+@mixin animate($name, $duration, $type, $loop){
+    animation: $name $duration $type $loop;
+}
+
+// Convert px to rem
+@function rem($pxValue) {
+    @return math.div($pxValue, 16px) * 1rem; 
+}

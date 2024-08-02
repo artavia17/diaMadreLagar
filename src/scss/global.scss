@@ -1,0 +1,35 @@
+// Contiene todos los mixins y variables
+@import './variables';
+@import './normalize';
+
+// Components
+@import './components/footer';
+
+// Pages
+@import './pages/home';
+@import './pages/not-fount';
+
+.responsive-box{
+
+    max-width: calc(100% - 30px);
+
+    @include bp(tablet){
+        max-width: 675px;
+    }
+
+    @include bp(tabletMD){
+        max-width: 850px;
+    }
+
+    @include bp(laptop){
+        max-width: 1000px;
+    }
+
+    @include bp(laptopBIG){
+        max-width: 1200px;
+    }
+
+    @include bp(escritorio){
+        max-width: 1300px;
+    }
+}
