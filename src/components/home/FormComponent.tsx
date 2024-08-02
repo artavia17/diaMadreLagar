@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import Image from "next/image";
 import HomeImage from '../../assets/img/happy_day.png';
 // import { toPng } from 'html-to-image';
-import downloadjs from 'downloadjs';
+// import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
 import React, { forwardRef, useImperativeHandle } from 'react';
 
@@ -184,47 +184,16 @@ const FormComponent = forwardRef((props, ref) => {
     };
 
     const descargar = () => {
-
-        // setInterval(() => {
-        //     const name = localStorage.getItem('name');
-        
-        //     if(name){
-        //         setMotherName(name);   
-        //     }else{
-        //         setMotherName('<span>E</span><span>l</span><span>l</span><span>a</span>');
-        //     }
-        // }, 500)
-
-        // setTimeout(() => {
-            // const containerElement : HTMLElement | null = document.querySelector('.title_image');
-
-            // if(containerElement){
-    
-            //     const spans = containerElement.querySelectorAll('span');
-            //     if (spans.length > 1) {
-            //         spans[0].style.color = "#FDB913";
-            //         spans[1].style.color = "#FDB913";
-            //     }
-            // }
-
-            htmlToImageConvert();
-        // }, 300);
+        htmlToImageConvert();
     }
 
     const htmlToImageConvert = async () => {
         if(elementRef.current){
 
-            const canvas = await html2canvas(elementRef.current);
-            const dataURL = canvas.toDataURL('image/png');
-            // downloadjs(dataURL, 'ellagardemama.png', 'image/png');
-
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = 'ellagardemama.png';
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            html2canvas(elementRef.current).then(canvas =>
+            {    
+                   document.body.appendChild(canvas)
+            });
         }
     };
 
