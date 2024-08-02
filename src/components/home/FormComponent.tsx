@@ -212,7 +212,7 @@ const FormComponent = forwardRef((props, ref) => {
 
         if(dowloadImage){
 
-            domtoimage.toPng(dowloadImage).then(url  => {
+            domtoimage.toJpeg(dowloadImage).then(url  => {
                 setTag(url);
             }).catch(err => {
                 console.log(err);
