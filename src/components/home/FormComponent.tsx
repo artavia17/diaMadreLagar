@@ -271,73 +271,69 @@ const FormComponent = forwardRef((props, ref) => {
                         )
                     }
                 </section>
-                {
-                    enviado && (
-                        <div 
-                            ref={elementRef}
-                            className="image_descargar"
+                    <div 
+                        ref={elementRef}
+                        className="image_descargar"
+                        style={{
+                            width: "400px",
+                            height: "500px",
+                            position: "relative",
+                            overflow: "hidden",
+                            zIndex: 999,
+                            display: enviado ? "flex" : "none",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            backgroundImage: `url(${HomeImage.src})`
+                        }}
+                    >
+
+                        {/*<Image 
+                            src={HomeImage.src} 
+                            alt="El Lagar dia de la madre" 
+                            width={HomeImage.width} 
+                            height={HomeImage.height}
                             style={{
                                 width: "400px",
                                 height: "500px",
+                                position: "absolute",
+                                top: "0px",
+                                left: "0px",
+                                zIndex: -1,
+                                objectFit: "cover",
+                            }}
+                        />*/}
+
+                        <section 
+                            className="text"
+                            style={{
+                                transform: "translateY(80px)",
+                                textAlign: "center",
+                                width: "300px",
+                                top: "-15px",
                                 position: "relative",
-                                overflow: "hidden",
-                                zIndex: 999,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                backgroundImage: `url(${HomeImage.src})`
                             }}
                         >
+                                <h4 
+                                    className="title_image"
+                                    dangerouslySetInnerHTML={{__html: motherName ? motherName : '<span style="color:#FDB913">E</span><span style="color:#FDB913">l</span><span>l</span><span>a</span>'}} 
+                                    aria-hidden="true"
+                                    style={{
+                                        fontSize: "50px",
+                                        margin: "0px",
+                                        color: "#ED1C24"
+                                    }}
+                                ></h4>
+                                <p 
+                                    dangerouslySetInnerHTML={{__html: `Las mejores herramientas, son las que da ${motherName ? motherName : '<span>E</span><span>l</span><span>l</span><span>a</span>'}`}}
+                                    style={{
+                                        fontSize: "15px",  
+                                        margin: "0px",
+                                        color: "#96877C",
+                                    }}
+                                ></p>
+                        </section>
 
-                            {/*<Image 
-                                src={HomeImage.src} 
-                                alt="El Lagar dia de la madre" 
-                                width={HomeImage.width} 
-                                height={HomeImage.height}
-                                style={{
-                                    width: "400px",
-                                    height: "500px",
-                                    position: "absolute",
-                                    top: "0px",
-                                    left: "0px",
-                                    zIndex: -1,
-                                    objectFit: "cover",
-                                }}
-                            />*/}
-
-                            <section 
-                                className="text"
-                                style={{
-                                    transform: "translateY(80px)",
-                                    textAlign: "center",
-                                    width: "300px",
-                                    top: "-15px",
-                                    position: "relative",
-                                }}
-                            >
-                                    <h4 
-                                        className="title_image"
-                                        dangerouslySetInnerHTML={{__html: motherName ? motherName : '<span style="color:#FDB913">E</span><span style="color:#FDB913">l</span><span>l</span><span>a</span>'}} 
-                                        aria-hidden="true"
-                                        style={{
-                                            fontSize: "50px",
-                                            margin: "0px",
-                                            color: "#ED1C24"
-                                        }}
-                                    ></h4>
-                                    <p 
-                                        dangerouslySetInnerHTML={{__html: `Las mejores herramientas, son las que da ${motherName ? motherName : '<span>E</span><span>l</span><span>l</span><span>a</span>'}`}}
-                                        style={{
-                                            fontSize: "15px",  
-                                            margin: "0px",
-                                            color: "#96877C",
-                                        }}
-                                    ></p>
-                            </section>
-
-                        </div>
-                    )
-                }
+                    </div>
         </section>
     )
 
