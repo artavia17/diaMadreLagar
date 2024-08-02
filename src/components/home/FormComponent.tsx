@@ -208,7 +208,10 @@ const FormComponent = forwardRef((props, ref) => {
         console.log('Cargo')
 
         if(dowloadImage){
+            console.log('Entro');
+
             const canvas = await html2canvas(dowloadImage);
+
             console.log(canvas);
             // const dataURL = canvas.toDataURL('image/png');
             // const response = await fetch(dataURL);
