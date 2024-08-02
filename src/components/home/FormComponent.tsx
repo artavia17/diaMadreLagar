@@ -231,7 +231,7 @@ const FormComponent = () => {
                                     <span className="center">Si querés descargá esta imagen, compartila en tus stories y etiquetanos.</span>
                                 </section>
                                 <section className="double">
-                                    <button className="send" onClick={descargar}>Descargar</button>
+                                    <button className="send" type="button" onClick={descargar}>Descargar</button>
                                     {/* <a href="">
                                         <Image  className="logo" src={InstagramIcon.src} alt="El Lagar" width={InstagramIcon.width} height={InstagramIcon.height}/>
                                     </a> */}
