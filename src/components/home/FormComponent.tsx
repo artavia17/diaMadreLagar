@@ -206,9 +206,13 @@ const FormComponent = forwardRef((props, ref) => {
             const imageBlob = await response.blob();
             const imageUrl = URL.createObjectURL(imageBlob);
 
+            console.log('Entro..')
+
             setTimeout(() => {
+                console.log('Entro...')
                 const tag = document.querySelector('.insert_button_dowload');
                 if(tag){
+                    console.log('Entro.....')
                     tag.innerHTML = `<a className="send" href="${imageUrl}" download target="_black">Descargar</a>`
                 }
             }, 50)
