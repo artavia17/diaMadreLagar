@@ -773,7 +773,8 @@
 
                 .double a{
                     display: inline-block;
-                    padding: 0 rem(30px) !important;
+                    padding: 10px rem(30px) !important;
+                    text-decoration: none;
                     border-radius: rem(10px);
                     background-color: $secundary_lagar_color;
                     border: none;

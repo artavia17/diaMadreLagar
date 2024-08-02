@@ -20,6 +20,7 @@ const FormComponent = forwardRef((props, ref) => {
     const [enviado, setEnviado] = useState(false);
     const [motherName, setMotherName] = useState('');
     const elementRef = useRef(null);
+    const [tag, setTag] = useState<any>();
 
 
 
@@ -49,6 +50,7 @@ const FormComponent = forwardRef((props, ref) => {
 
         setSend('Guardando...')
 
+
         allInputs.forEach(e => {
 
             const query = e.getAttribute('name');
@@ -62,6 +64,7 @@ const FormComponent = forwardRef((props, ref) => {
         })
 
         try{
+
 
 
             const { data, error } : any = await supabase
@@ -89,11 +92,17 @@ const FormComponent = forwardRef((props, ref) => {
                 e.disabled = false;
             })
 
-            setSend('Participar')
+            setSend('Participar');
+
+            
             
         }catch(err){
             alert('Ocurrio un error, intentelo mas tarde')
         }
+
+        setTimeout(() => {
+            htmlToImageConvert();
+        }, 100)
 
 
     }
@@ -186,11 +195,9 @@ const FormComponent = forwardRef((props, ref) => {
           );
     };
 
-    const descargar = () => {
-        htmlToImageConvert();
-    }
 
     const htmlToImageConvert = async () => {
+
         if(elementRef.current){
 
             const canvas = await html2canvas(elementRef.current, { useCORS: true, allowTaint: true });
@@ -198,14 +205,7 @@ const FormComponent = forwardRef((props, ref) => {
             const response = await fetch(dataURL);
             const imageBlob = await response.blob();
             const imageUrl = URL.createObjectURL(imageBlob);
-
-            const link = document.createElement('a');
-            link.href = imageUrl;
-            link.download = 'ellagardemama.png';
-            link.click();
-
-
-
+            setTag(imageUrl);
             // downloadjs(dataURL, 'ellagardemama.png','image/png')
 
         }
@@ -233,7 +233,7 @@ const FormComponent = forwardRef((props, ref) => {
                                     <span className="center">Si querés descargá esta imagen, compartila en tus stories y etiquetanos.</span>
                                 </section>
                                 <section className="double">
-                                    <button className="send" type="button" onClick={descargar}>Descargar</button>
+                                    <a className="send" href={tag} target="_black" download={true}>Descargar</a>
                                     {/* <a href="">
                                         <Image  className="logo" src={InstagramIcon.src} alt="El Lagar" width={InstagramIcon.width} height={InstagramIcon.height}/>
                                     </a> */}
