@@ -3,13 +3,15 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { createClient } from '@supabase/supabase-js';
 import Image from "next/image";
 import HomeImage from '../../assets/img/happy_day.png';
-// import { toPng } from 'html-to-image';
 import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
 import React, { forwardRef, useImperativeHandle } from 'react';
 
+
 const FormComponent = forwardRef((props, ref) => {
 
+    
+    
 
     const supabaseUrl = 'https://cbrpwbonvjolaknkszsg.supabase.co'
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNicnB3Ym9udmpvbGFrbmtzenNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjI1NTQ3NDUsImV4cCI6MjAzODEzMDc0NX0.K2xSMHzs77KsxqwqDjzk9i-L98ABoCg18_dAhP3cD1U';
@@ -18,6 +20,7 @@ const FormComponent = forwardRef((props, ref) => {
     const [enviado, setEnviado] = useState(false);
     const [motherName, setMotherName] = useState('');
     const elementRef = useRef(null);
+
 
 
     useImperativeHandle(ref, () => ({
@@ -192,12 +195,19 @@ const FormComponent = forwardRef((props, ref) => {
 
             const canvas = await html2canvas(elementRef.current, { useCORS: true, allowTaint: true });
             const dataURL = canvas.toDataURL('image/png');
-            downloadjs(dataURL, 'ellagardemama.png','image/png')
+            const response = await fetch(dataURL);
+            const imageBlob = await response.blob();
+            const imageUrl = URL.createObjectURL(imageBlob);
 
-            // html2canvas(elementRef.current).then(canvas =>
-            // {    
-            //     downloadjs(canvas, 'ellagardemama.png','image/png')
-            // });
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = 'ellagardemama.png';
+            link.click();
+
+
+
+            // downloadjs(dataURL, 'ellagardemama.png','image/png')
+
         }
     };
 
