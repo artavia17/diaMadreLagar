@@ -203,12 +203,17 @@ const FormComponent = forwardRef((props, ref) => {
     const htmlToImageConvert = async () => {
 
 
-        const dowloadImage = document.querySelector('.image_descargar');
+        const dowloadImage : HTMLElement | null = document.querySelector('.image_descargar');
 
         console.log('Cargo')
 
         if(dowloadImage){
-            console.log(dowloadImage);
+            const canvas = await html2canvas(dowloadImage, { useCORS: true, allowTaint: true });
+            const dataURL = canvas.toDataURL('image/png');
+            const response = await fetch(dataURL);
+            const imageBlob = await response.blob();
+            const imageUrl = URL.createObjectURL(imageBlob);
+            console.log(imageUrl);
         }
 
         if(elementRef.current){
