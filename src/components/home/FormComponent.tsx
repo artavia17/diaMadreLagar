@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import Image from "next/image";
 import HomeImage from '../../assets/img/happy_day.png';
 // import { toPng } from 'html-to-image';
-// import downloadjs from 'downloadjs';
+import downloadjs from 'downloadjs';
 import html2canvas from 'html2canvas';
 import React, { forwardRef, useImperativeHandle } from 'react';
 
@@ -190,10 +190,13 @@ const FormComponent = forwardRef((props, ref) => {
     const htmlToImageConvert = async () => {
         if(elementRef.current){
 
-            html2canvas(elementRef.current).then(canvas =>
-            {    
-                   document.body.appendChild(canvas)
-            });
+            const canvas = await html2canvas(elementRef.current);
+            const dataURL = canvas.toDataURL('image/png');
+            downloadjs(dataURL, 'ellagardemama.png','image/png')
+            // html2canvas(elementRef.current).then(canvas =>
+            // {    
+            //     downloadjs(canvas, 'ellagardemama.png','image/png')
+            // });
         }
     };
 
@@ -271,10 +274,11 @@ const FormComponent = forwardRef((props, ref) => {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
+                                backgroundImage: `url(${HomeImage.src})`
                             }}
                         >
 
-                            <Image 
+                            {/*<Image 
                                 src={HomeImage.src} 
                                 alt="El Lagar dia de la madre" 
                                 width={HomeImage.width} 
@@ -288,7 +292,7 @@ const FormComponent = forwardRef((props, ref) => {
                                     zIndex: -1,
                                     objectFit: "cover",
                                 }}
-                            />
+                            />*/}
 
                             <section 
                                 className="text"
