@@ -309,7 +309,6 @@ const FormComponent = () => {
                                     transform: "translateY(80px)",
                                     textAlign: "center",
                                     width: "300px",
-                                    fontFamily: "fantasy",
                                     top: "-15px",
                                     position: "relative",
                                 }}

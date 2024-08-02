@@ -844,11 +844,16 @@
     margin: 0px auto 30px  auto;
 
     h4{
+        font-family: $font_bold;
         span{
             &:first-of-type,
             &:nth-of-type(2){
                 color: $principal_lagar_color !important;
             }
         }
+    }
+
+    p{
+        font-family: $font_regular;
     }
 }
