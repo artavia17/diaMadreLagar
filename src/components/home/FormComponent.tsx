@@ -212,7 +212,7 @@ const FormComponent = forwardRef((props, ref) => {
 
         if(dowloadImage){
 
-            domtoimage.toJpeg(dowloadImage).then(url  => {
+            domtoimage.toPng(dowloadImage).then(url  => {
                 setTag(url);
             }).catch(err => {
                 console.log(err);
@@ -339,13 +339,13 @@ const FormComponent = forwardRef((props, ref) => {
                             display: enviado ? "flex" : "none",
                             alignItems: "center",
                             justifyContent: "center",
-                            backgroundImage: `url(${HomeImage.src})`,
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: "center"
+                            // backgroundImage: `url(${HomeImage.src})`,
+                            // backgroundRepeat: 'no-repeat',
+                            // backgroundPosition: "center"
                         }}
                     >
 
-                        {/*<Image 
+                        <img 
                             src={HomeImage.src} 
                             alt="El Lagar dia de la madre" 
                             width={HomeImage.width} 
@@ -354,12 +354,10 @@ const FormComponent = forwardRef((props, ref) => {
                                 width: "400px",
                                 height: "500px",
                                 position: "absolute",
-                                top: "0px",
-                                left: "0px",
                                 zIndex: -1,
                                 objectFit: "cover",
                             }}
-                        />*/}
+                        />
 
                         <section 
                             className="text"
