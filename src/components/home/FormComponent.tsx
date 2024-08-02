@@ -102,7 +102,7 @@ const FormComponent = forwardRef((props, ref) => {
 
         setTimeout(() => {
             htmlToImageConvert();
-        }, 100)
+        }, 200)
 
 
     }
@@ -197,7 +197,7 @@ const FormComponent = forwardRef((props, ref) => {
 
 
     const htmlToImageConvert = async () => {
-
+        
         if(elementRef.current){
 
             const canvas = await html2canvas(elementRef.current, { useCORS: true, allowTaint: true });
@@ -205,8 +205,13 @@ const FormComponent = forwardRef((props, ref) => {
             const response = await fetch(dataURL);
             const imageBlob = await response.blob();
             const imageUrl = URL.createObjectURL(imageBlob);
-            setTag(imageUrl);
-            // downloadjs(dataURL, 'ellagardemama.png','image/png')
+
+            setTimeout(() => {
+                const tag = document.querySelector('.insert_button_dowload');
+                if(tag){
+                    tag.innerHTML = `<a className="send" href="${imageUrl}" download target="_black">Descargar</a>`
+                }
+            }, 50)
 
         }
     };
@@ -232,8 +237,8 @@ const FormComponent = forwardRef((props, ref) => {
                                 <section className="form">
                                     <span className="center">Si querés descargá esta imagen, compartila en tus stories y etiquetanos.</span>
                                 </section>
-                                <section className="double">
-                                    <a className="send" href={tag} download={true}>Descargar</a>
+                                <section className="double insert_button_dowload">
+                                    
                                     {/* <a href="">
                                         <Image  className="logo" src={InstagramIcon.src} alt="El Lagar" width={InstagramIcon.width} height={InstagramIcon.height}/>
                                     </a> */}
