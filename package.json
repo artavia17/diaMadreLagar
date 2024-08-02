@@ -12,6 +12,7 @@
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.20.0",
     "@supabase/supabase-js": "^2.45.0",
+    "@xuannghia/html2canvas": "^1.3.3",
     "downloadjs": "^1.4.7",
     "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",

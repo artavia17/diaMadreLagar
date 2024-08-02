@@ -6,7 +6,7 @@ import HomeImage from '../../assets/img/happy_day.png';
 // import downloadjs from 'downloadjs';
 import * as htmlToImage from 'html-to-image';
 import React, { forwardRef, useImperativeHandle } from 'react';
-import html2canvas from "html2canvas";
+import html2canvas from "@xuannghia/html2canvas";
 
 
 const FormComponent = forwardRef((props, ref) => {
