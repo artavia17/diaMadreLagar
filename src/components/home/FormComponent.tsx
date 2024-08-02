@@ -339,13 +339,13 @@ const FormComponent = forwardRef((props, ref) => {
                             display: enviado ? "flex" : "none",
                             alignItems: "center",
                             justifyContent: "center",
-                            // backgroundImage: `url(${HomeImage.src})`,
-                            // backgroundRepeat: 'no-repeat',
-                            // backgroundPosition: "center"
+                            backgroundImage: `url(${HomeImage.src})`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: "center"
                         }}
                     >
 
-                        <img 
+                        {/* <img 
                             src={HomeImage.src} 
                             alt="El Lagar dia de la madre" 
                             width={HomeImage.width} 
@@ -357,7 +357,7 @@ const FormComponent = forwardRef((props, ref) => {
                                 zIndex: -1,
                                 objectFit: "cover",
                             }}
-                        />
+                        /> */}
 
                         <section 
                             className="text"
