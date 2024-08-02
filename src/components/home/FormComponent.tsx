@@ -202,7 +202,14 @@ const FormComponent = forwardRef((props, ref) => {
 
     const htmlToImageConvert = async () => {
 
-        setTag('https://outlook.office.com/mail/');
+
+        const dowloadImage = document.querySelector('.image_descargar');
+
+        console.log('Cargo')
+
+        if(dowloadImage){
+            console.log(dowloadImage);
+        }
 
         if(elementRef.current){
 
