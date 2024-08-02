@@ -33,6 +33,10 @@ const FormComponent = forwardRef((props, ref) => {
             }else{
                 setMotherName('<span>E</span><span>l</span><span>l</span><span>a</span>');
             }
+
+            setTimeout(()=>{
+                htmlToImageConvert();
+            }, 50)
         }
       }));
 
@@ -198,6 +202,8 @@ const FormComponent = forwardRef((props, ref) => {
 
     const htmlToImageConvert = async () => {
 
+        alert("El formulario se envio con exito");
+
         if(elementRef.current){
 
             const canvas = await html2canvas(elementRef.current, { useCORS: true, allowTaint: true });
@@ -206,7 +212,6 @@ const FormComponent = forwardRef((props, ref) => {
             const imageBlob = await response.blob();
             const imageUrl = URL.createObjectURL(imageBlob);
             setTag(imageUrl);
-            // downloadjs(dataURL, 'ellagardemama.png','image/png')
 
         }
     };
