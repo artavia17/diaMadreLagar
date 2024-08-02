@@ -211,9 +211,9 @@ const FormComponent = forwardRef((props, ref) => {
         if(dowloadImage){
 
             const dataUrl = await htmlToImage.toPng(dowloadImage);
+            setTag(dataUrl);
 
-            const link = document.createElement('a');
-            setTag(link);
+            
             // link.download = 'html-to-img.png';
             // link.href = dataUrl;
             // toPng(dowloadImage, { cacheBust: false })
